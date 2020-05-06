@@ -2,7 +2,7 @@
  * @Author: shetia
  * @Date: 2020-05-06 14:22:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-05-06 15:59:44
+ * @LastEditTime: 2020-05-06 16:20:11
  * @Description: file content
  */
 import Router from 'vue-router'
@@ -14,7 +14,7 @@ let routes = [
       title: '主页'
     },
     path: '/',
-    name: 'home',
+    name: 'index',
     redirect: '/home',
     component: resolve => require(['@/pages/home.vue'], resolve)
   },

@@ -33,11 +33,16 @@ export default {
   color: #333;
   line-height: 60px;
   flex-shrink: 0;
+  position: sticky;
+  top: 0px;
 }
 .el-main {
   background-color: #fff;
   color: #666;
-  text-align: left;
+  text-align: center;
+}
+.el-button {
+  margin-bottom: 12px !important;
 }
 i{
   font-size: 28px;
@@ -48,5 +53,12 @@ i{
     color:#00b9d1;
      box-shadow: 0 6px 3px -4px #00b9d1;
   }
+}
+.black-box{
+  height: 100%;
+  background: #333;
+  padding: 12px;
+  box-sizing: border-box;
+  text-align: center;
 }
 </style>
