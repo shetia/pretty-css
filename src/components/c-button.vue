@@ -45,6 +45,12 @@
     <button class="btn btn-ghost btn-shine" :class="[type]" v-else-if="mold === 'flash'">
       <slot></slot>
     </button>
+    <!-- 彩色 -->
+    <button class="new-button button-anon-pen" v-else-if="mold === 'colours'">
+      <span>
+        <slot></slot>
+      </span>
+    </button>
     <!-- 其他 -->
     <button class="btn btn-ghost" :class="[type]" v-else>
       <slot></slot>
@@ -59,7 +65,7 @@ export default {
   props: {
     mold: {
       type: String,
-      default: 'single',   // single multiple flash
+      default: 'single',   // single multiple flash colours
     },
     dataText: {
       type: String,
@@ -98,7 +104,6 @@ export default {
   user-select: none;
   white-space: nowrap;
   transition: 0.25s;
-  margin: 12px;
   &:hover {
     background: hsl(var(--hue), 100%, 31%);
   }
@@ -305,6 +310,7 @@ export default {
 }
 .c-button {
   display: inline-block;
+  margin: 12px;
   .mbtn {
     --hue: attr(data-hue);
     --ease-in-duration: 0.25s;
@@ -323,7 +329,7 @@ export default {
     user-select: none;
     white-space: nowrap;
     transition: 0.25s;
-    margin: 12px;
+    
     &:hover {
       background: hsl(var(--hue), 100%, 31%);
     }
@@ -483,6 +489,56 @@ export default {
         }
       }
     }
+  }
+}
+
+// 彩色
+.button-anon-pen {
+    border:none;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    background-image: linear-gradient(115deg,#4fcf70,#fad648,#a767e5,#12bcfe,#44ce7b);
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #fff;
+    display: block;
+    z-index: 2;
+    overflow: hidden;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    span{
+      padding: 12px;
+      display: inline-block;
+      font-size: 1.1rem;
+      align-items: center;
+      background: #444;
+      border-radius: 3px;
+      display: block;
+      justify-content: center;
+      margin: 3px;
+      box-sizing: border-box;
+      height: 100%;
+      transition: background .5s ease;
+    }
+    &:hover {
+      animation: Sidebar_rainbowBorder-dkMw3 .5s linear infinite;
+    }
+}
+@keyframes Sidebar_rainbowBorder-dkMw3{
+  0%, 100% {
+      background-image: linear-gradient(115deg,#4fcf70,#fad648,#a767e5,#12bcfe);
+  }
+  25% {
+      background-image: linear-gradient(115deg,#fad648,#a767e5,#12bcfe,#4fcf70);
+  }
+  50% {
+      background-image: linear-gradient(115deg,#a767e5,#12bcfe,#4fcf70,#fad648);
+  }
+  75% {
+      background-image: linear-gradient(115deg,#12bcfe,#4fcf70,#fad648,#a767e5);
   }
 }
 </style>

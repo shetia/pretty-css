@@ -1,8 +1,21 @@
 <template>
   <div class="home">
-    <template  v-for="(item, index) in pages">
-      <c-button v-if="!item.isHide" :key="index"  @click.native="goPage(item)" :type="randomColor()" :dataText="item.name" :mold="randomMod()">{{ item.name }}</c-button>
-    </template>
+    <div class="search">
+      <el-input v-model="keyword" placeholder="请输入关键字搜索" @keyup.enter.native="search"/>
+    </div>
+    <div>
+      <template  v-for="(item, index) in pages">
+        <c-button 
+          v-if="!item.isHide" 
+          :key="index"  
+          @click.native="goPage(item)" 
+          :type="randomColor" 
+          :dataText="item.name" 
+          :mold="randomMod">
+            {{ item.name }}
+          </c-button>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -26,12 +39,10 @@ export default {
   data() {
     return {
       pages: pages,
+      keyword: ''
     }
   },
-  methods: {
-    goPage(item) {
-      this.$router.push(item.path)
-    },
+  computed : {
     randomColor () {
       let arr = ['primary', 'danger', 'info', 'purple', 'blue', 'yellow']
       let len = arr.length
@@ -40,11 +51,29 @@ export default {
       return str
     },
     randomMod () {
-      let arr = ['single', 'multiple', 'flash']
+      let arr = ['single', 'multiple', 'colours', 'flash']
       let len = arr.length
       let random = Math.floor(Math.random() * len) + 1
       let str = arr[random]
       return str
+    }
+  },
+  watch: {
+    keyword (n) {
+      if(!n){
+        this.pages = pages
+      }
+    }
+  },
+  methods: {
+    goPage(item) {
+      this.$router.push(item.path)
+    },
+    search () {
+      let list = pages.filter(item => {
+        return item.name.includes(this.keyword)
+      })
+      this.pages = list
     }
   },
 }
@@ -55,5 +84,11 @@ export default {
   width: 100%;
   height: 100%;
   background: #444;
+  .search{
+    position:fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 </style>

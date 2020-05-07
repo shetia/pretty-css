@@ -2,12 +2,16 @@
  * @Author: shetia
  * @Date: 2020-05-06 14:22:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-05-07 08:57:42
+ * @LastEditTime: 2020-05-07 15:00:28
  * @Description: file content
  */
 import Router from 'vue-router'
 import Vue from 'vue'
 Vue.use(Router)
+const routerPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+}
 let routes = [
   {
     meta: {

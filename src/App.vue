@@ -2,7 +2,7 @@
   <div id="app">
     <el-container>
       <el-header>
-        <i class="el-icon-s-home" @click="$router.push('/home')"></i>
+        <i class="el-icon-s-home" @click="$router.push('/')"></i>
       </el-header>
       <el-main>
         <router-view></router-view>

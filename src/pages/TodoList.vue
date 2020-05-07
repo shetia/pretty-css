@@ -1,45 +1,42 @@
 <template>
   <div>
-<form>
-  <fieldset class="todo-list">
-    <legend class="todo-list__title">My Special Todo List</legend>
-    <label class="todo-list__label">
-      <input type="checkbox" name="" id="" />
-      <i class="check"></i>
-      <span>Make awesome CSS animation</span>
-    </label>
-    <label class="todo-list__label">
-      <input type="checkbox" name="" id="" />
-      <i class="check"></i>
-      <span>Watch awesome bangumi</span>
-    </label>
-    <label class="todo-list__label">
-      <input type="checkbox" name="" id="" />
-      <i class="check"></i>
-      <span>Encounter awesome people</span>
-    </label>
-    <label class="todo-list__label">
-      <input type="checkbox" name="" id="" />
-      <i class="check"></i>
-      <span>Be an awesome man</span>
-    </label>
-  </fieldset>
-</form>
-
+    <form>
+      <fieldset class="todo-list">
+        <legend class="todo-list__title">My Special Todo List</legend>
+        <label class="todo-list__label">
+          <input type="checkbox" name="" id="" />
+          <i class="check"></i>
+          <span>Make awesome CSS animation</span>
+        </label>
+        <label class="todo-list__label">
+          <input type="checkbox" name="" id="" />
+          <i class="check"></i>
+          <span>Watch awesome bangumi</span>
+        </label>
+        <label class="todo-list__label">
+          <input type="checkbox" name="" id="" />
+          <i class="check"></i>
+          <span>Encounter awesome people</span>
+        </label>
+        <label class="todo-list__label">
+          <input type="checkbox" name="" id="" />
+          <i class="check"></i>
+          <span>Be an awesome man</span>
+        </label>
+      </fieldset>
+    </form>
   </div>
 </template>
 
 <script>
 export default {
-pageName: '代办列表',
+  pageName: '代办列表',
 }
 </script>
 
 <style lang="scss">
 // color scheme: https://coolors.co/e63946-585b57-7b9fa1-264456-0b1420
-@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
-
-
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
 
 .todo-list {
   display: flex;
@@ -63,7 +60,7 @@ pageName: '代办列表',
     color: #f1faee;
     cursor: pointer;
 
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       opacity: 0;
       appearance: none;
 
@@ -91,7 +88,7 @@ pageName: '代办列表',
 
         &::before {
           position: absolute;
-          content: "";
+          content: '';
           top: 50%;
           left: 0;
           width: 100%;
@@ -114,5 +111,4 @@ pageName: '代办列表',
     }
   }
 }
-
 </style>

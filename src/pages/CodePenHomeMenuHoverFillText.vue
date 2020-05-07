@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div  class="black-box">
     <ul>
       <li><a href="#">home</a></li>
       <li><a href="#">archives</a></li>
@@ -20,18 +20,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// https://picular.co/bluemoon
 
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,400i,700');
-
-body {
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: #1a1e23;
-}
 
 ul {
   display: flex;
