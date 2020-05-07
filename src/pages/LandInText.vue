@@ -7,7 +7,13 @@
 </template>
 
 <script>
-setTimeout(() => {
+
+export default {
+  pageName: '交错文本',
+  data() {
+    return {}
+  },
+  mounted() {
   let landInTexts = document.querySelectorAll('.landIn')
       landInTexts.forEach((landInText) => {
         let letters = landInText.textContent.split('')
@@ -15,34 +21,25 @@ setTimeout(() => {
         letters.forEach((letter, i) => {
           let span = document.createElement('span')
           span.textContent = letter
-          span.style.animation = `landInAni 0.8s ease-out both`
-          span.style.animationDelay = `${i * 0.05}s`
-          landInText.append(span)
+          // span.style.animationDelay = `${i * 0.05}s`
+          setTimeout(()=>{
+            landInText.append(span)
+          }, i * 100)
         })
       })
-})
-export default {
-  pageName: '交错文本',
-  data() {
-    return {}
-  },
-  mounted() {
-    this.$nextTick(() => {
-      
-    })
   },
 }
 </script>
 
-<style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Lora:400,400i,700');
+<style lang="scss" >
+// @import url('https://fonts.googleapis.com/css?family=Lora:400,400i,700');
 
 .landin-text {
   background-image: linear-gradient(
       rgba(16, 16, 16, 0.8),
       rgba(16, 16, 16, 0.8)
     ),
-    url(https://i.loli.net/2019/10/18/buDT4YS6zUMfHst.jpg);
+    url(../assets/images/buDT4YS6zUMfHst.jpg);
   background-size: cover;
 }
 
@@ -59,8 +56,9 @@ p {
   color: white;
   font-family: Lora, serif;
   white-space: pre;
+  text-align: center;
   span {
-    animation: landInAni 0.8s ease-out both !important;
+    animation: landInAni 0.8s ease-out both;
   }
 }
 

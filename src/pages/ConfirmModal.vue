@@ -37,12 +37,11 @@
       </div>
     </dialog>
     <form action="javascript:void(0);">
-      <button
-        class="btn btn-danger"
+      <c-button
         onclick="document.querySelector('#confirm-modal').showModal()"
       >
         Delete history
-      </button>
+      </c-button>
     </form>
   </div>
 </template>
@@ -59,22 +58,12 @@ export default {
 <style lang="scss" scoped>
 @import url(https://fonts.googleapis.com/css?family=Lato);
 
-:root {
+
+
+.btn {
   --primary-color: hsl(171, 100%, 41%);
   --success-color: hsl(141, 53%, 53%);
   --danger-color: hsl(348, 86%, 61%);
-}
-
-body {
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  font-family: Lato, sans-serif;
-  background: #eceffc;
-}
-
-.btn {
   position: relative;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
@@ -92,10 +81,8 @@ body {
 
   &-danger {
     color: white;
-    background-color: var(--danger-color);
-
     &:hover {
-      background-color: red;
+      background-color: var(--danger-color);
     }
   }
 

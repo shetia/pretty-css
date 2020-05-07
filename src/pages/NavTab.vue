@@ -1,5 +1,5 @@
 <template>
-  <div  class="black-box">
+  <div class="black-box">
     <nav class="navtab">
       <ul>
         <li class="navtab-item active">

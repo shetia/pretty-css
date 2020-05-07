@@ -2,7 +2,7 @@
  * @Author: shetia
  * @Date: 2020-05-06 14:22:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-05-06 16:20:11
+ * @LastEditTime: 2020-05-07 08:57:42
  * @Description: file content
  */
 import Router from 'vue-router'
@@ -25,7 +25,7 @@ coms.keys().forEach(path => {
   const name = path.split('/')[1].split('.')[0] // 获取组件名称
   routes.push({
     meta: {
-      title: name
+      title: reqCom.default.pageName || name
     },
     path: `/${name}`,
     name,

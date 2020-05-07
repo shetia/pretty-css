@@ -45,11 +45,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-body {
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
+a{
+  display:inline-block;
+  width: 100px;
+  height: 100px;
 }
 
 .gauges {
@@ -58,5 +57,8 @@ body {
 
 .gauge {
   margin: 1rem;
+  &.gauge-primary{
+    color: red;
+  } 
 }
 </style>

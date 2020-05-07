@@ -3,26 +3,26 @@
     <div class="scene">
   <div class="card">
     <div class="card__face card__face--front">
-      <img src="https://i.loli.net/2019/11/23/cnKl1Ykd5rZCVwm.jpg" />
+      <img src="@/assets/images/cnKl1Ykd5rZCVwm.jpg" />
     </div>
     <div class="card__face card__face--back">
-      <img src="https://i.loli.net/2019/11/16/cqyJiYlRwnTeHmj.jpg" />
+      <img src="@/assets/images/cqyJiYlRwnTeHmj.jpg" />
     </div>
   </div>
   <div class="card">
     <div class="card__face card__face--front">
-      <img src="https://i.loli.net/2019/11/16/FLnzi5Kq4tkRZSm.jpg" />
+      <img src="@/assets/images/FLnzi5Kq4tkRZSm.jpg" />
     </div>
     <div class="card__face card__face--back">
-      <img src="https://i.loli.net/2019/10/18/buDT4YS6zUMfHst.jpg" />
+      <img src="@/assets/images/buDT4YS6zUMfHst.jpg" />
     </div>
   </div>
   <div class="card">
     <div class="card__face card__face--front">
-      <img src="https://i.loli.net/2019/10/18/uXF1Kx7lzELB6wf.jpg" />
+      <img src="@/assets/images/uXF1Kx7lzELB6wf.jpg" />
     </div>
     <div class="card__face card__face--back">
-      <img src="https://i.loli.net/2019/11/03/RtVq2wxQYySDb8L.jpg" />
+      <img src="@/assets/images/RtVq2wxQYySDb8L.jpg" />
     </div>
   </div>
 </div>
@@ -43,14 +43,6 @@ export default {
 
 <style lang='scss' scoped>
 // Thanks to https://3dtransforms.desandro.com/card-flip
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: black;
-}
-
 .scene {
   width: 1000px;
   display: flex;
@@ -80,7 +72,7 @@ body {
       transition: 1s ease-in-out;
       -webkit-box-reflect: below 0
         linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
-
+      // [ above | below | right | left ]? <length>? <image>?  方位+偏移量+遮罩层
       img {
         width: 240px;
         height: 300px;
