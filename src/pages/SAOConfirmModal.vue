@@ -1,0 +1,231 @@
+<template>
+  <div class="black-box">
+    <dialog id="confirm-modal" class="modal">
+      <div class="modal-content">
+        <h4 class="modal-title">Confirm</h4>
+        <article class="modal-description">
+          <div class="container">
+            <p>Will you accept this duel?</p>
+            <p>Challenger: <span class="text-bold">Kirito</span></p>
+            <p>Mode: <span class="text-bold">1 vs 1</span></p>
+          </div>
+        </article>
+        <div class="modal-options">
+          <button
+            class="btn btn-round option confirm"
+            onclick="document.querySelector('#confirm-modal').close()"
+          >
+            <div class="circle"></div>
+          </button>
+          <button
+            class="btn btn-round option cancel"
+            onclick="document.querySelector('#confirm-modal').close()"
+          >
+            <div class="cross"></div>
+          </button>
+        </div>
+      </div>
+    </dialog>
+    <form action="javascript:void(0);">
+      <button
+        class="btn btn-danger"
+        onclick="document.querySelector('#confirm-modal').showModal()"
+      >
+        Open Modal
+      </button>
+    </form>
+  </div>
+</template>
+
+<script>
+export default {
+  pageName: '确认弹框2',
+  data() {
+    return {}
+  },
+  mounted() {},
+}
+</script>
+
+<style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700');
+
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: #eceffc;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.btn {
+  position: relative;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: hsl(0, 0%, 13%);
+  text-decoration: none;
+  background-color: lightblue;
+  border: transparent;
+  border-radius: 3px;
+  outline: transparent;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: 0.25s;
+
+  &-danger {
+    color: white;
+    background-color: hsl(348, 86%, 61%);
+
+    &:hover {
+      background-color: hsl(348, 86%, 53%);
+    }
+  }
+
+  &-round {
+    border-radius: 50%;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 360px;
+  padding: 0;
+  font-family: Roboto, sans-serif;
+  border: transparent;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    0 100px 80px rgba(0, 0, 0, 0.07);
+  opacity: 0;
+  animation: show-modal 0.6s forwards;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(3px);
+  }
+
+  .modal-content {
+    display: grid;
+    place-items: center;
+  }
+
+  .modal-title {
+    margin: 0;
+    padding: 1rem 0;
+  }
+
+  .modal-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 98%;
+    height: 0;
+    background: linear-gradient(
+      hsl(0, 0%, 70%) 0% 1%,
+      hsl(0, 0%, 93%) 11% 89%,
+      hsl(0, 0%, 70%) 99% 100%
+    );
+    overflow: hidden;
+    animation: open-description 0.6s 0.2s cubic-bezier(0.745, 0.045, 0.255, 1)
+      forwards; // ease-out-cubic
+  }
+
+  .modal-options {
+    padding: 1rem 0;
+
+    .option {
+      width: 3rem;
+      height: 3rem;
+      background: transparent;
+      border: 1px solid;
+
+      &::before {
+        position: absolute;
+        content: '';
+        top: 4px;
+        left: 4px;
+        right: 4px;
+        bottom: 4px;
+        background: currentColor;
+        border-radius: inherit;
+      }
+
+      &:hover {
+        filter: brightness(1.75);
+      }
+    }
+
+    .confirm {
+      margin-right: 3rem;
+      color: #4a89dc;
+
+      .circle {
+        position: absolute;
+        content: '';
+        top: 14px;
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        border: 5px solid white;
+        border-radius: inherit;
+      }
+    }
+
+    .cancel {
+      color: #da4453;
+
+      .cross {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        transform: rotate(45deg);
+
+        &::before,
+        &::after {
+          position: absolute;
+          content: '';
+          background: white;
+        }
+
+        &::before {
+          top: 0;
+          left: calc(50% - 3px);
+          width: 6px;
+          height: 100%;
+        }
+
+        &::after {
+          top: calc(50% - 3px);
+          left: 0;
+          width: 100%;
+          height: 6px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes show-modal {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes open-description {
+  to {
+    height: 210px;
+  }
+}
+</style>

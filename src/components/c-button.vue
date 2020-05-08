@@ -622,7 +622,7 @@ export default {
   span {
     padding: 8px 16px;
     display: inline-block;
-    font-size: 14px;
+    font-size: 16px;
     align-items: center;
     background: #444;
     border-radius: 3px;
@@ -680,9 +680,9 @@ export default {
 // 滚动
 .rollbtn {
   position: relative;
-  padding: 8px 16px;
+  padding: 8px 24px;
   font-family: Lato, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
   color: black;
   text-decoration: none;

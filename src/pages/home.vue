@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="black-box home">
     <div class="search">
       <el-input v-model="keyword" placeholder="请输入关键字搜索" @keyup.enter.native="search"/>
     </div>
@@ -12,7 +12,7 @@
           :type="randomColor" 
           :dataText="item.name" 
           :mold="randomMod">
-            {{ item.name }}
+            {{ item.name || 'start' }}
           </c-button>
       </template>
     </div>
@@ -81,9 +81,6 @@ export default {
 
 <style lang="scss" scoped>
 .home{
-  width: 100%;
-  height: 100%;
-  background: #444;
   .search{
     position:fixed;
     top: 10px;

@@ -2,12 +2,13 @@
  * @Author: shetia
  * @Date: 2020-05-06 14:22:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-05-07 15:00:28
+ * @LastEditTime: 2020-05-08 16:09:43
  * @Description: file content
  */
 import Router from 'vue-router'
 import Vue from 'vue'
 Vue.use(Router)
+// 重写push方法, 避免跳到同一页面报错
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
   return routerPush.call(this, location).catch(error=> error)
@@ -23,6 +24,7 @@ let routes = [
     component: resolve => require(['@/pages/home.vue'], resolve)
   },
 ]
+// 动态引入
 let coms = require.context('../pages', true, /\.vue$/)
 coms.keys().forEach(path => {
   const reqCom = coms(path) // 获取每个组件

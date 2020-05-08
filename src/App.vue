@@ -40,6 +40,7 @@ export default {
   background-color: #fff;
   color: #666;
   text-align: center;
+  overflow: auto;
 }
 .el-button {
   margin-bottom: 12px !important;
@@ -55,7 +56,7 @@ i{
   }
 }
 .black-box{
-  height: 100%;
+  min-height: 100%;
   background: #333;
   padding: 12px;
   box-sizing: border-box;

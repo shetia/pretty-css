@@ -1,0 +1,275 @@
+<template>
+  <div class="black-box">
+    <form class="card" action="javascript:void(0);">
+      <div class="hint">
+        <h2>Message Sent!</h2>
+      </div>
+      <textarea
+        class="textarea"
+        placeholder="Say something."
+        required
+      ></textarea>
+      <div class="multi-button">
+        <button class="btn btn-danger btn-shock" id="cancel">Cancel</button>
+        <button class="btn btn-info btn-shock" type="reset" id="reset">
+          Clear
+        </button>
+        <button class="btn btn-success btn-shock" type="submit" id="send">
+          Send
+        </button>
+      </div>
+    </form>
+  </div>
+</template>
+
+<script>
+export default {
+  pageName: '发送消息',
+  data() {
+    return {}
+  },
+  mounted() {
+    let card = document.querySelector('.card')
+    let textarea = document.querySelector('.card .textarea')
+    let sendButton = document.querySelector('#send')
+    sendButton.addEventListener('click', () => {
+      if (textarea.checkValidity()) {
+        card.classList.add('sent')
+      }
+    })
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.card{
+  width: 400px;
+  margin: 10px auto;
+}
+.btn {
+  position: relative;
+  padding: 8px 24px;
+  font-size: 100%;
+  color: white;
+  text-decoration: none;
+  background-color: hsl(var(--hue), 100%, 41%);
+  border: 1px solid hsl(var(--hue), 100%, 41%);
+  border-radius: 5px;
+  outline: transparent;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: 0.3s;
+
+  &:hover {
+    background: hsl(var(--hue), 100%, 31%);
+  }
+
+  &-primary {
+    --hue: 171;
+  }
+
+  &-info {
+    --hue: 204;
+  }
+
+  &-success {
+    --hue: 141;
+  }
+
+  &-danger {
+    --hue: 348;
+  }
+
+  &-shock {
+    background: transparent;
+    border-color: transparent;
+    overflow: visible;
+
+    &:hover {
+      background: transparent;
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: '';
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      border: inherit;
+      border-radius: inherit;
+      transition: 0.3s;
+    }
+
+    &::before {
+      z-index: -1;
+      background: hsl(var(--hue), 100%, 41%);
+    }
+
+    &::after {
+      z-index: -2;
+      background: white;
+      border-color: hsl(var(--hue), 100%, 41%);
+      transform: scale(0.5);
+    }
+
+    &:hover {
+      color: hsl(var(--hue), 100%, 41%);
+
+      &::before {
+        opacity: 0;
+        transform: scale(1.2);
+      }
+
+      &::after {
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  font-family: Lato, sans-serif;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0px 0.6px rgba(0, 0, 0, 0.028), 0 0px 1.3px rgba(0, 0, 0, 0.04),
+    0 0px 2.5px rgba(0, 0, 0, 0.05), 0 0px 4.5px rgba(0, 0, 0, 0.06),
+    0 0px 8.4px rgba(0, 0, 0, 0.072), 0 0px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.6);
+  animation: bump-in 0.5s forwards;
+
+  .hint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      z-index: 2;
+      font-size: 2em;
+      color: transparent;
+      user-select: none;
+      transition: 1.5s 0.5s;
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      background: hsl(var(--hue), 100%, 31%);
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      transition: transform cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.5s;
+    }
+
+    &::after {
+      transition-delay: 0.1s;
+    }
+  }
+
+  &.sent {
+    .hint {
+      h2 {
+        color: white;
+      }
+
+      &::before,
+      &::after {
+        transform: rotate(0);
+      }
+
+      &::before {
+        background: white;
+      }
+
+      &::after {
+        --hue: 141;
+      }
+    }
+  }
+
+  .textarea {
+    // palette: https://flatuicolors.com
+    appearance: none;
+    height: 240px;
+    padding: 10px;
+    font-size: 100%;
+    font-family: inherit;
+    letter-spacing: 0.1em;
+    color: #7f8c8d;
+    background: #eeeeee;
+    border: none;
+    border-radius: 5px;
+    transition: 0.5s;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: float-in 0.8s 0.5s forwards;
+
+    &:focus {
+      box-shadow: inset 0 0px 0.3px rgba(0, 0, 0, 0.028),
+        inset 0 0px 0.7px rgba(0, 0, 0, 0.04),
+        inset 0 0px 1.3px rgba(0, 0, 0, 0.05),
+        inset 0 0px 2.2px rgba(0, 0, 0, 0.06),
+        inset 0 0px 4.2px rgba(0, 0, 0, 0.072),
+        inset 0 0px 10px rgba(0, 0, 0, 0.1);
+      outline: none;
+    }
+  }
+
+  .multi-button {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+
+    .btn {
+      font-weight: bold;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: float-in 0.8s forwards;
+
+      @for $i from 1 through 3 {
+        &:nth-child(#{$i}) {
+          animation-delay: 0.5s + 0.2s * $i;
+        }
+      }
+    }
+  }
+}
+
+@keyframes bump-in {
+  50% {
+    transform: scale(1.05);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
