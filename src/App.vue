@@ -34,7 +34,14 @@ export default {
   line-height: 60px;
   flex-shrink: 0;
   position: sticky;
+}
+.el-header{
   top: 0px;
+  box-shadow: 0px 4px 10px #fff;
+}
+.el-footer{
+  bottom: 0px;
+  box-shadow: 0px -4px 10px #fff;
 }
 .el-main {
   background-color: #fff;

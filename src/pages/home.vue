@@ -51,7 +51,7 @@ export default {
       return str
     },
     randomMod () {
-      let arr = ['single', 'multiple', 'colours', 'flash', 'roll', 'snake', 'particle']
+      let arr = ['single', 'multiple', 'colours', 'flash', 'roll', 'snake', 'particle', 'shock']
       let len = arr.length
       let random = Math.floor(Math.random() * len) + 1
       let str = arr[random]

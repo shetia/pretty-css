@@ -11,7 +11,7 @@ export default {
   pageName: '按钮',
   data () {
     return {
-      list: ['single', 'multiple', 'colours', 'flash', 'roll', 'snake', 'particle']
+      list: ['single', 'multiple', 'colours', 'flash', 'roll', 'snake', 'particle', 'shock']
     }
   },
   methods: {

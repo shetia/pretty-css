@@ -79,9 +79,7 @@ export default {
 <style lang='scss' scoped>
 
 .loading{
-  position: relative;
-  top: 50%;
-  left: 50%;
+  @include vertical-center;
 }
 .circle {
   $circle-count: 60;

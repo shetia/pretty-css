@@ -81,6 +81,12 @@
     <button class="particlebtn  particlebtn-bubbles"  :class="[type]"  v-else-if="mold === 'particle'">
       <slot></slot>
     </button>
+    <!-- 震惊 -->
+    <button class="btn1 btn1-primary btn1-shock"   v-else-if="mold === 'shock'">
+      <span>
+        <slot></slot>
+      </span>
+    </button>
     <!-- 其他 -->
     <button class="btn btn-ghost" :class="[type]" v-else>
       <slot></slot>
@@ -95,7 +101,7 @@ export default {
   props: {
     mold: {
       type: String,
-      default: 'single', // single multiple flash colours roll snake particle
+      default: 'single', // single multiple flash colours roll snake particle shock
     },
     dataText: {
       type: String,
@@ -339,53 +345,52 @@ export default {
       transform: translateX(100%);
     }
   }
-  // 蛇形
-      // 蛇形
-    &-snake-border {
-      .btn-borders {
+    // 蛇形
+  &-snake-border {
+    .btn-borders {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      .border-top {
         position: absolute;
         top: 0;
-        left: 0;
         width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, transparent, white);
+        animation: moveHorizontally 2s linear infinite;
+      }
+
+      .border-right {
+        position: absolute;
+        right: 0;
+        width: 2px;
         height: 100%;
+        background: linear-gradient(to bottom, transparent, white);
+        animation: moveVertically 2s 1s linear infinite;
+      }
 
-        .border-top {
-          position: absolute;
-          top: 0;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(to right, transparent, white);
-          animation: moveHorizontally 2s linear infinite;
-        }
+      .border-bottom {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to left, transparent, white);
+        animation: moveHorizontally 2s linear reverse infinite;
+      }
 
-        .border-right {
-          position: absolute;
-          right: 0;
-          width: 2px;
-          height: 100%;
-          background: linear-gradient(to bottom, transparent, white);
-          animation: moveVertically 2s 1s linear infinite;
-        }
-
-        .border-bottom {
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(to left, transparent, white);
-          animation: moveHorizontally 2s linear reverse infinite;
-        }
-
-        .border-left {
-          position: absolute;
-          left: 0;
-          width: 2px;
-          height: 100%;
-          background: linear-gradient(to top, transparent, white);
-          animation: moveVertically 2s 1s linear reverse infinite;
-        }
+      .border-left {
+        position: absolute;
+        left: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(to top, transparent, white);
+        animation: moveVertically 2s 1s linear reverse infinite;
       }
     }
+  }
 }
 // 蛇形动画
 
@@ -874,6 +879,83 @@ export default {
       100% -2%, -5% 80%, 100% 55%, 2% 100%, 23% 100%, 42% 100%, 60% 95%, 70% 96%,
       100% 100%;
     background-size: 0% 0%;
+  }
+}
+
+
+// 震惊
+.btn1 {
+  --hue: 190;
+  position: relative;
+  padding: 8px 16px;
+  margin: 12px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: white;
+  text-decoration: none;
+  background-color: hsl(var(--hue), 100%, 41%);
+  border: 1px solid hsl(var(--hue), 100%, 41%);
+  border-radius: 3px;
+  outline: transparent;
+  overflow: hidden;
+  user-select: none;
+  white-space: nowrap;
+  transition: 0.3s;
+  span{
+    position: relative;
+    z-index: 3;
+  }
+  &:hover {
+    background: hsl(var(--hue), 100%, 31%);
+  }
+
+  &-primary {
+    --hue: 171;
+  }
+  &-shock {
+    background: transparent;
+    border-color: transparent;
+    overflow: visible;
+
+    &:hover {
+      background: transparent;
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: "";
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      border: inherit;
+      border-radius: inherit;
+      transition: 0.3s;
+    }
+
+    &::before {
+      z-index: 2;
+      background: hsl(var(--hue), 100%, 41%);
+    }
+
+    &::after {
+      z-index: 1;
+      background: transparent;
+      border-color: hsl(var(--hue), 100%, 41%);
+      transform: scale(0.5);
+    }
+
+    &:hover {
+      color: hsl(var(--hue), 100%, 41%);
+      &::before {
+        opacity: 0;
+        transform: scale(1.2);
+      }
+      &::after {
+        transform: scale(1);
+      }
+    }
   }
 }
 

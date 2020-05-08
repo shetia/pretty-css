@@ -47,63 +47,66 @@ export default {
 <style lang="scss" scoped>
 
 
-.gauge {
-    --gauge-value: 500;
-    --gauge-max-value: 1000;
-    --percentage: calc(var(--gauge-value) / var(--gauge-max-value) * 100%);
-    --bg-color: white;
-    --gauge-color: var(--primary-color);
-    --gauge-color-lighter: var(--primary-color-lighter);
-    --text-color: black;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90px;
-    height: 90px;
-    color: var(--text-color);
-    background: conic-gradient(var(--gauge-color) var(--percentage),var(--gauge-color-lighter) 0);
-    border-radius: 50%;
-    counter-reset: value var(--gauge-value);
-    margin:12px;
-    &::before {
-      position: absolute;
-      content: counter(value);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 90%;
-      height: 90%;
-      background: var(--bg-color);
-      border-radius: inherit;
-    }
-    &.gauge-primary {
-      --gauge-color: var(--primary-color);
-      --gauge-color-lighter: var(--primary-color-lighter);
-    }
-    &.gauge-secondary {
-      --gauge-color: var(--secondary-color);
-      --gauge-color-lighter: var(--secondary-color-lighter);
-    }
-    &.gauge-success {
-      --gauge-color: var(--success-color);
-      --gauge-color-lighter: var(--success-color-lighter);
-    }
-    &.gauge-info {
-      --gauge-color: var(--info-color);
-      --gauge-color-lighter: var(--info-color-lighter);
-    }
-    &.gauge-warning {
-      --gauge-color: var(--warning-color);
-      --gauge-color-lighter: var(--warning-color-lighter);
-    }
-    &.gauge-danger {
-      --gauge-color: var(--danger-color);
-      --gauge-color-lighter: var(--danger-color-lighter);
-    }
-}
+// .gauge {
+//     --gauge-value: 500;
+//     --gauge-max-value: 1000;
+//     --percentage: calc(var(--gauge-value) / var(--gauge-max-value) * 100%);
+//     --bg-color: white;
+//     --gauge-color: var(--primary-color);
+//     --gauge-color-lighter: var(--primary-color-lighter);
+//     --text-color: black;
+//     position: relative;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     width: 90px;
+//     height: 90px;
+//     color: var(--text-color);
+//     background: conic-gradient(var(--gauge-color) var(--percentage),var(--gauge-color-lighter) 0);
+//     border-radius: 50%;
+//     counter-reset: value var(--gauge-value);
+//     margin:12px;
+//     &::before {
+//       position: absolute;
+//       content: counter(value);
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       width: 90%;
+//       height: 90%;
+//       background: var(--bg-color);
+//       border-radius: inherit;
+//     }
+//     &.gauge-primary {
+//       --gauge-color: var(--primary-color);
+//       --gauge-color-lighter: var(--primary-color-lighter);
+//     }
+//     &.gauge-secondary {
+//       --gauge-color: var(--secondary-color);
+//       --gauge-color-lighter: var(--secondary-color-lighter);
+//     }
+//     &.gauge-success {
+//       --gauge-color: var(--success-color);
+//       --gauge-color-lighter: var(--success-color-lighter);
+//     }
+//     &.gauge-info {
+//       --gauge-color: var(--info-color);
+//       --gauge-color-lighter: var(--info-color-lighter);
+//     }
+//     &.gauge-warning {
+//       --gauge-color: var(--warning-color);
+//       --gauge-color-lighter: var(--warning-color-lighter);
+//     }
+//     &.gauge-danger {
+//       --gauge-color: var(--danger-color);
+//       --gauge-color-lighter: var(--danger-color-lighter);
+//     }
+// }
 .gauges {
-  display: flex;
+  @include flex-center;
+  .gauge{
+    margin: 12px;
+  }
 }
 
 </style>
