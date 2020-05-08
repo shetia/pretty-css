@@ -44,14 +44,14 @@ export default {
   },
   computed : {
     randomColor () {
-      let arr = ['primary', 'danger', 'info', 'purple', 'blue', 'yellow']
+      let arr = ['primary', 'danger', 'info', 'purple', 'blue', 'yellow', 'pink']
       let len = arr.length
       let random = Math.floor(Math.random() * len) + 1
       let str = arr[random]
       return str
     },
     randomMod () {
-      let arr = ['single', 'multiple', 'colours', 'flash']
+      let arr = ['single', 'multiple', 'colours', 'flash', 'roll', 'snake', 'particle']
       let len = arr.length
       let random = Math.floor(Math.random() * len) + 1
       let str = arr[random]
