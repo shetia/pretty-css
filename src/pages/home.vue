@@ -20,27 +20,31 @@
 </template>
 
 <script>
-let coms = require.context('../pages', true, /\.vue$/)
-let pages = []
-coms.keys().forEach((path) => {
-  const reqCom = coms(path)
-  const pathName = path.split('/')[1].split('.')[0]
-  setTimeout(() => {
-    pages.push({
-      path: pathName,
-      name: (reqCom.default && reqCom.default.pageName) || pathName,
-      isHide: (reqCom.default && reqCom.default.isHide) || false,
-    })
-  })
-})
+
 export default {
   pageName: '首页',
   isHide: true,
   data() {
     return {
-      pages: pages,
-      keyword: ''
+      pages: [],
+      keyword: '',
+      allPages: []
     }
+  },
+  created () {
+    let coms = require.context('../pages', true, /\.vue$/)
+    let pages = []
+    coms.keys().forEach((path) => {
+      const reqCom = coms(path)
+      const pathName = path.split('/')[1].split('.')[0]
+      pages.push({
+        path: pathName,
+        name: (reqCom.default && reqCom.default.pageName) || pathName,
+        isHide: (reqCom.default && reqCom.default.isHide) || false,
+      })
+    })
+    this.pages = pages
+    this.allPages = pages
   },
   computed : {
     randomColor () {
@@ -61,7 +65,7 @@ export default {
   watch: {
     keyword (n) {
       if(!n){
-        this.pages = pages
+        this.pages = this.allPages
       }
     }
   },
@@ -70,7 +74,7 @@ export default {
       this.$router.push(item.path)
     },
     search () {
-      let list = pages.filter(item => {
+      let list = this.pages.filter(item => {
         return item.name.includes(this.keyword)
       })
       this.pages = list
