@@ -1,13 +1,21 @@
+<!--
+ * @Descripttion:
+ * @version:
+ * @Author: shetia
+ * @Date: 2020-05-19 20:10:43
+ * @LastEditors: somebody
+ * @LastEditTime: 2020-05-20 20:24:14
+-->
 <template>
   <div id="app">
     <el-container>
       <el-header>
-        <i class="el-icon-s-home" @click="$router.push('/')"></i>
+        <i class="icon-home el-icon-s-home" @click="$router.push('/')"></i>
       </el-header>
       <el-main>
         <router-view></router-view>
       </el-main>
-      <el-footer></el-footer>
+      <!-- <el-footer></el-footer> -->
     </el-container>
   </div>
 </template>
@@ -18,7 +26,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #app{
   height: 100%;
 }
@@ -52,7 +60,7 @@ export default {
 .el-button {
   margin-bottom: 12px !important;
 }
-i{
+.icon-home{
   font-size: 28px;
   color: #fff;
   cursor: pointer;
