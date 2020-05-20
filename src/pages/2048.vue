@@ -1,16 +1,35 @@
 <template>
   <div  class='black-box '>
     <h3 class="total">分数: {{total}}</h3>
-    <div class="box-2048">
+    <div class="box-2048" @touchstart.stop.prevent="startHandler" @touchend.stop.prevent="endHandler" >
       <div class="row" v-for="(item, index) in list" :key="index">
-        <div class="row-item" :style="{'--bg-color': parseInt(2048 - subItem * 20)}" v-for="(subItem, subIndex) in item" :key="subIndex">
+        <div class="row-item" :style="{'--bg-color': filterNum(subItem)}" v-for="(subItem, subIndex) in item" :key="subIndex">
           <span class="word" v-if="subItem !== 0">
             {{ subItem }}
           </span>
         </div>
       </div>
     </div>
-    <c-button @click.native="renew">重新开始</c-button>
+    <!-- 方向键 -->
+    <div class="direction-box">
+      <div class='direction'>
+        <div class="key top" @click="haul({y: 1})" title="上">
+          <i class="el-icon-caret-left"></i>
+        </div>
+        <div class="key left" @click="haul({x: -1})" title="左">
+          <i class="el-icon-caret-left"></i>
+        </div>
+        <div class="key bottom" @click="haul({y: -1})" title="下">
+          <i class="el-icon-caret-left"></i>
+        </div>
+        <div class="key right" @click="haul({x: 1})"  title="右">
+          <i class="el-icon-caret-left"></i>
+        </div>
+        <div class="center" @click="renew" title="重新开始">
+          <i class="el-icon-refresh"></i>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,7 +48,13 @@ export default {
         x: 0,
         y: 0
       },
-      isOk: false
+      isOk: false,
+      isTouch: false,
+      coord: {  // touchstart坐标
+        x: 0,
+        y: 0
+      },
+      timer: Date.now()
     }
   },
   mounted () {
@@ -57,6 +82,44 @@ export default {
     }
   },
   methods: {
+    startHandler (e) {
+      let x = e.targetTouches[0] && e.targetTouches[0].pageX || 0
+      let y = e.targetTouches[0] && e.targetTouches[0].pageY || 0
+      this.coord = {
+        x,
+        y
+      }
+    },
+    endHandler (e) {
+      let x = e.changedTouches[0] && e.changedTouches[0].pageX || 0
+      let y = e.changedTouches[0] && e.changedTouches[0].pageY || 0
+
+      let xDiff = this.coord.x - x
+      let yDiff = this.coord.y - y
+      // 是否水平方向移动
+      let isX = Math.abs(xDiff) > Math.abs(yDiff)
+      // 是否正方向
+      let isJust = (isX && xDiff < 0) || (!isX && yDiff > 0)
+      this.move = {
+        x: isX ? (isJust ? 1 : -1) : 0,
+        y: !isX ? (isJust ? 1 : -1) : 0
+      }
+      this.merge()
+    },
+    // 按键
+    haul (direction) {
+      let move = {
+        x: 0,
+        y: 0
+      }
+      for(let prop in move){
+        if(direction[prop]){
+          move[prop] = direction[prop]
+        }
+      }
+      this.move = move
+      this.merge()
+    },
     // 重新开始
     renew () {
       let list = [
@@ -98,7 +161,6 @@ export default {
         move[direction] = key
         this.move = move
         this.merge()
-
       }
     },
     // 随机生成2, 4, 加入到list
@@ -115,12 +177,16 @@ export default {
       })
       let len = empty.length
       if(len < 1) {
-        if(this.loop) clearTimeout(this.loop)
-        this.loop = setTimeout(() => {
-          if(!this.isSame(this.list)){
-            this.$message.error('游戏结束')
+        if(!this.isSame(this.list)){
+          if (Date.now() - this.timer > 3000) {
+              this.$message({
+                type: 'error',
+                message: '游戏结束',
+                center: true
+              })
+              this.timer = Date.now()
           }
-        }, 300);
+        }
         return
       }
       let randomNum = Math.floor(Math.random() * len)
@@ -219,6 +285,9 @@ export default {
         }
       }
       return false
+    },
+    filterNum (num) {
+      return 2048 - (num * 20)
     }
   },
   beforeDestroy(){
@@ -271,6 +340,86 @@ export default {
   }
   100%{
     transform: scale(1);
+  }
+}
+// 方向键
+.direction-box{
+  @include flex-center;
+  .direction{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background:#ccc;
+    position:relative;
+    transform: rotate(45deg);
+    box-shadow: 0px 0px 10px #fff;
+    overflow: hidden !important;
+    @include flex-center;
+    .center{
+      @include flex-center;
+      transition: all .25s;
+      width: 70px;
+      height: 70px;
+      background: #fff;
+      z-index: 10;
+      border-radius: 50%;
+      box-shadow: 0px 0px 10px #aaa, 0px 0px 10px #ccc inset;
+      transform:rotate(270deg);
+      font-size: 16px;
+      cursor: pointer;
+      padding: 17px;
+      box-sizing: border-box;
+      &:hover{
+        transform: rotate(0deg);
+      }
+      i{
+        color: #999;
+        font-weight: 600;
+        box-shadow: none;
+      }
+    }
+    .key{
+      --hsl-two: 75%;
+      --hsl-three: 80%;
+      --hsl-x: 70;
+      --hsl-y: 160;
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      transform-origin: right bottom;
+      cursor: pointer;
+      transition: all .5s;
+      z-index: 1;
+      >i{
+        position:absolute;
+        bottom: 25px;
+        right: 25px;
+        transform: rotate(45deg);
+        box-shadow: none;
+      }
+      &.top{
+        background: #a3f5da;
+      }
+      &.left{
+        background: #e7f5a3;
+        transform: rotate(-90deg);
+      }
+      &.bottom{
+        background: #a3f5da;
+        transform: rotate(180deg);
+      }
+      &.right{
+        background: #e7f5a3;
+        transform: rotate(90deg);
+      }
+      &:hover{
+        // --hsl-three: 60%;
+        // --hsl-two: 55%;
+      }
+    }
+
   }
 }
 </style>

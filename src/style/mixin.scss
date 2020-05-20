@@ -6,6 +6,12 @@
   left: 50%;
   transform:translate(-50%, -50%);
 }
+// 水平居中
+@mixin level-center {
+  position: absolute;
+  left: 50%;
+  transform:translateX(-50%);
+}
 // flex 居中
 @mixin flex-center{
   display: flex;
