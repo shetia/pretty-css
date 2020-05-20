@@ -193,9 +193,10 @@ export default {
       let ij = empty[randomNum]
       this.$set(this.list[ij[0]], [ij[1]], num)
     },
-    // 合并
+    // 把同一方向的相邻相同值的合并
     merge () {
       let list = JSON.parse(JSON.stringify(this.list))
+      // 默认左为正方向, 其他方向先把方向转成向左的
       if (this.move.x === 1){ // 右  需转两下
         list = this.rotateMatrix(list, 2)
       } else if (this.move.y === 1){ // 上 需转三下
@@ -204,9 +205,9 @@ export default {
         list = this.rotateMatrix(list, 1)
       }
 
+      // 把有值的靠边
       for(let x = 0; x < 4; x++){
         let item = list[x]
-        // 把有值得靠边
         for(let i = 0; i < 3; i++){
           let k = i + 1
           if(!item[i]){
@@ -253,6 +254,7 @@ export default {
         list = this.rotateMatrix(list, 3)
       }
       this.list = list
+      // 再随机生成2, 4, 加入到list
       setTimeout(() => {
         this.randomBase()
       }, 500)
