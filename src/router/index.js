@@ -39,5 +39,6 @@ coms.keys().forEach(path => {
   })
 })
 export default new Router({
+  mode: 'hash',
   routes 
 })
