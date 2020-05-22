@@ -9,7 +9,7 @@
             :class="{
               w: subItem && subItem % 2 == 0,
               b: subItem && subItem % 2 == 1,
-              cur: subItem && subItem === num
+              cur: subItem && subItem === num || winList.includes(subItem)
             }"
             v-for="(subItem, subIndex) in item"
             :key="subIndex"
@@ -64,16 +64,12 @@ export default {
       myWin: [],
       computerWin: [],
       wins: [],
-      count: 0
+      count: 0,
+      winList: []
     }
   },
   created () {
     this.init()
-  },
-  mounted () {
-  },
-  computed: {
-
   },
   methods: {
     // 初始化
@@ -141,6 +137,7 @@ export default {
       this.computerWin = computerWin
       this.isWin = false
       this.num = 0
+      this.winList = []
     },
     // 点击棋盘下棋
     cellHandler (x, y) {
@@ -246,6 +243,7 @@ export default {
           this.computerWin[k]++
           this.myWin[k] = 6
           if (this.computerWin[k] == 5) {
+            this.checkWin(this.list)
             this.$message.success(`游戏结束! 白获胜`)
             this.isWin = true
             this.who = 2
@@ -255,20 +253,26 @@ export default {
       }
 
     },
-    // 尚未用到, 可用于双人对战
+    // 检测是否连五珠, 顺便获取赢的数组, 也可用于判断双人对战哪方胜利
     checkWin (list) {
       let total = 0
+      let winList = []
       // 水平
       for(let i = 0; i < 15; i++){  // 行
         for(let j = 0; j < 11; j++){ // 列
           total = 0
           let k = j
           let who = list[i][k] && list[i][k] % 2
+          winList = []
           while(list[i][k] && list[i][k] % 2 === who && k - j < 5){ // 检查五个
+            winList.push(list[i][k])
             total++
             k++
           }
-          if(total>=5) return true
+          if(total>=5) {
+            this.winList = winList
+            return true
+          }
         }
       }
       // 垂直
@@ -277,11 +281,16 @@ export default {
           total = 0
           let k = j
           let who = list[k][i] && list[k][i] % 2
+          winList = []
           while(list[k][i] && list[k][i] % 2 === who && k - j < 5){ // 检查五个
+            winList.push(list[k][i])
             total++
             k++
           }
-          if(total>=5) return true
+          if(total>=5) {
+            this.winList = winList
+            return true
+          }
         }
       }
       // 左斜
@@ -290,11 +299,16 @@ export default {
           total = 0
           let k = 0
           let who = list[i + k][j + k] && list[i + k][j + k] % 2
+          winList = []
           while(list[i + k][j + k] && list[i + k][j + k] % 2 === who && k < 5){ // 检查五个
+            winList.push(list[i + k][j + k])
             total++
             k++
           }
-          if(total>=5) return true
+          if(total>=5) {
+            this.winList = winList
+            return true
+          }
         }
       }
       // 右斜
@@ -303,11 +317,16 @@ export default {
           total = 0
           let k = 0
           let who = list[i - k][j + k] && list[i - k][j + k] % 2
+          winList = []
           while(list[i - k][j + k] && list[i - k][j + k] % 2 === who && k < 5){ // 检查五个
+            winList.push(list[i - k][j + k])
             total++
             k++
           }
-          if(total>=5) return true
+          if(total>=5) {
+            this.winList = winList
+            return true
+          }
         }
       }
       return false
@@ -351,14 +370,14 @@ export default {
         &.w {
           &:before {
             background: #fff;
-            box-shadow: 0px 0px 10px #333 inset;
+            box-shadow: -3px -2px 6px #333 inset;
           }
         }
         // 黑棋
         &.b {
           &:before {
             background: #000;
-            box-shadow: 0px -2px 10px #eee inset;
+            box-shadow: 1px 2px 6px #eee inset;
           }
         }
         &.cur {
@@ -379,8 +398,6 @@ export default {
     grid-template-rows: repeat(15, 6.66%);
     .gird-row {
       grid-template-columns: repeat(15, 6.66%);
-      .gird-column {
-      }
     }
   }
   // 棋盘线
@@ -405,10 +422,10 @@ export default {
 @keyframes flash {
   0%,
   100% {
-    box-shadow: 0px 0px 10px #999 inset, 0px 0px 8px 2px red;
+    box-shadow: 0px 0px 6px #999 inset, 0px 0px 8px 2px red;
   }
   50% {
-    box-shadow: 0px 0px 10px #999 inset, 0px 0px 1px 0px red;
+    box-shadow: 0px 0px 6px #999 inset, 0px 0px 1px 0px red;
   }
 }
 </style>
