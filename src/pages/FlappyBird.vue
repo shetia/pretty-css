@@ -170,7 +170,7 @@ export default {
   height: 500px;
   border:1px solid #ccc;
   margin: 10px auto;
-  background: url('~@/assets/images/sky.png') bottom;
+  background: url('~@/assets/images/sky.png') center;
   background-size: cover;
   position: relative;
   overflow: hidden;
