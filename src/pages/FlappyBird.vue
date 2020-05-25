@@ -142,13 +142,15 @@ export default {
       let y = this.birds.y
       let doms = this.$refs.pillarRef || []
       for(let item of doms){
-        if(item.offsetLeft <= 50 && item.offsetLeft >=0){
+        let left = item.offsetLeft
+        // 小鸟宽高 30 
+        if( left <= 80 && left >= 0){
           let up = item.children && item.children[0]
-          if(up.offsetHeight > y || up.offsetHeight + 120 < y){
+          if(up.offsetHeight >= y || up.offsetHeight + 120 <= y){
             return true
           }
           // 统计分数
-          if(item.offsetLeft == 0){
+          if(left == 0){
             this.score++
           }
         }
