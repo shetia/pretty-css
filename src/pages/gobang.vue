@@ -264,7 +264,7 @@ export default {
           let k = j
           let who = list[i][k] && list[i][k] % 2
           winList = []
-          while(list[i][k] && list[i][k] % 2 === who && k - j < 5){ // 检查五个
+          while(list[i] && list[i][k] && list[i][k] % 2 === who && k - j < 5){ // 检查五个
             winList.push(list[i][k])
             total++
             k++
@@ -282,7 +282,7 @@ export default {
           let k = j
           let who = list[k][i] && list[k][i] % 2
           winList = []
-          while(list[k][i] && list[k][i] % 2 === who && k - j < 5){ // 检查五个
+          while(list[k] && list[k][i] && list[k][i] % 2 === who && k - j < 5){ // 检查五个
             winList.push(list[k][i])
             total++
             k++
@@ -300,7 +300,7 @@ export default {
           let k = 0
           let who = list[i + k][j + k] && list[i + k][j + k] % 2
           winList = []
-          while(list[i + k][j + k] && list[i + k][j + k] % 2 === who && k < 5){ // 检查五个
+          while(list[i + k] && list[i + k][j + k] && list[i + k][j + k] % 2 === who && k < 5){ // 检查五个
             winList.push(list[i + k][j + k])
             total++
             k++
@@ -318,7 +318,7 @@ export default {
           let k = 0
           let who = list[i - k][j + k] && list[i - k][j + k] % 2
           winList = []
-          while(list[i - k][j + k] && list[i - k][j + k] % 2 === who && k < 5){ // 检查五个
+          while(list[i - k] && list[i - k][j + k] && list[i - k][j + k] % 2 === who && k < 5){ // 检查五个
             winList.push(list[i - k][j + k])
             total++
             k++

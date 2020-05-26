@@ -62,6 +62,7 @@ export default {
       this.isStart = false
       this.end = false
       this.bgX = 0
+      this.score = 0
       // 初始化小鸟
       let birds = {
         stepx: 52,
