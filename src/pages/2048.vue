@@ -82,6 +82,7 @@ export default {
     }
   },
   methods: {
+    // 触摸开始, 储存开始位置坐标
     startHandler (e) {
       let x = e.targetTouches[0] && e.targetTouches[0].pageX || 0
       let y = e.targetTouches[0] && e.targetTouches[0].pageY || 0
@@ -90,6 +91,7 @@ export default {
         y
       }
     },
+    // 触摸结束, 计算滑动方向
     endHandler (e) {
       let x = e.changedTouches[0] && e.changedTouches[0].pageX || 0
       let y = e.changedTouches[0] && e.changedTouches[0].pageY || 0
@@ -129,6 +131,7 @@ export default {
         [0,0,0,0]
       ]
       this.$set(this, 'list', list)
+      this.isOk = false
       this.randomBase()
     },
     // 方向键
@@ -205,9 +208,10 @@ export default {
         list = this.rotateMatrix(list, 1)
       }
 
-      // 把有值的靠边
+      // 合并
       for(let x = 0; x < 4; x++){
         let item = list[x]
+        // 把有值的靠边
         for(let i = 0; i < 3; i++){
           let k = i + 1
           if(!item[i]){
@@ -261,11 +265,8 @@ export default {
     },
     // 旋转矩阵
     rotateMatrix (list, num) {
-      for(let k = 0; k < num; k++){
-        rotate()
-      }
       // 顺时针旋转矩阵90°
-      function rotate () {
+      let rotate = function () {
         for(let i = 0; i < 2; i++){
           [list[i], list[3 - i]] = [list[3 - i], list[i]]
         }
@@ -274,6 +275,11 @@ export default {
             [list[i][j], list[j][i]] = [list[j][i], list[i][j]]
           }
         }
+      }
+      
+      // 选转几次就调用几次
+      for(let k = 0; k < num; k++){
+        rotate()
       }
       return list
     },
@@ -288,11 +294,13 @@ export default {
       }
       return false
     },
+    // 根据数值 修改颜色数值 用于方块颜色
     filterNum (num) {
       return 2048 - (num * 20)
     }
   },
   beforeDestroy(){
+    // 页面销毁 清除监听键盘事件
     document.removeEventListener('keydown', this.keyDownHandler)
   }
 }
